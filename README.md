@@ -1,5 +1,5 @@
 # Ex04 Simple Calculator - React Project
-## Date:11/04/2025
+## Date:11.04.2025
 
 ## AIM
 To  develop a Simple Calculator using React.js with clean and responsive design, ensuring a smooth user experience across different screen sizes.
@@ -46,28 +46,118 @@ Deploy the website.
 Upload to GitHub Pages for free hosting.
 
 ## PROGRAM
-## calculator.css
-```css
-.calculator {
-  width: 300px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #222;
-  text-align: center;
+INDEX.JS
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+```
+APP.JS
+```
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [input, setInput] = useState('');
+
+  const handleClick = (value) => {
+    setInput(input + value);
+  };
+
+  const clearInput = () => {
+    setInput('');
+  };
+
+  const calculateResult = () => {
+    try {
+      setInput(eval(input));
+    } catch {
+      setInput('Error');
+    }
+  };
+
+  return (
+    <div className="container">
+      <div className="calculator">
+        <form className="display">
+          <input type="text" value={input} readOnly />
+        </form>
+
+        <div className="buttons">
+          <button onClick={() => handleClick('1')}>1</button>
+          <button onClick={() => handleClick('2')}>2</button>
+          <button onClick={() => handleClick('3')}>3</button>
+          <button onClick={() => handleClick('+')}>+</button>
+
+          <button onClick={() => handleClick('4')}>4</button>
+          <button onClick={() => handleClick('5')}>5</button>
+          <button onClick={() => handleClick('6')}>6</button>
+          <button onClick={() => handleClick('-')}>-</button>
+
+          <button onClick={() => handleClick('7')}>7</button>
+          <button onClick={() => handleClick('8')}>8</button>
+          <button onClick={() => handleClick('9')}>9</button>
+          <button onClick={() => handleClick('*')}>*</button>
+
+          <button onClick={() => handleClick('0')}>0</button>
+          <button onClick={clearInput}>C</button>
+          <button onClick={calculateResult}>=</button>
+          <button onClick={() => handleClick('/')}>/</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-.display {
+export default App;
+```
+APP.CSS
+```
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #3498db, #8e44ad);
+}
+
+.container {
+  width: 300px;
+}
+
+.calculator {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.display input {
   width: 100%;
-  height: 50px;
-  font-size: 1.5em;
+  height: 60px;
+  font-size: 24px;
   text-align: right;
   margin-bottom: 10px;
   padding: 5px;
-  border-radius: 5px;
   border: none;
-  background-color: #333;
-  color: white;
+  border-radius: 5px;
+  background-color: rgb(240, 240, 240);
 }
 
 .buttons {
@@ -77,116 +167,29 @@ Upload to GitHub Pages for free hosting.
 }
 
 button {
-  padding: 15px;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #444;
+  height: 60px;
+  font-size: 20px;
+  background-color: rgb(91, 91, 151);
   color: white;
-  transition: 0.3s;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #666;
+  background-color: rgb(137, 22, 245);
 }
 
-.clear {
-  grid-column: span 4;
-  background-color: red;
+button:active {
+  background-color: rgb(100, 100, 200);
 }
 
-.clear:hover {
-  background-color: darkred;
-}
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh; 
-  justify-content: center;
-  background-color: #121212;
-  color: white;
-}
-footer {
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 1rem;
-  color: #bbb;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
+button:nth-child(16) {
+  background-color: rgb(220, 53, 69); /* Red for 'C' */
 }
 ```
-## calculator.js
-```js
-import React, { useState } from "react";
-import "./Calculator.css";
-
-const Calculator = () => {
-  const [input, setInput] = useState("");
-
-  const handleClick = (value) => {
-    setInput((prev) => prev + value);
-  };
-
-  const handleClear = () => {
-    setInput("");
-  };
-
-  const handleCalculate = () => {
-    try {
-      setInput(eval(input).toString()); // Evaluate the input expression
-    } catch (error) {
-      setInput("Error");
-    }
-  };
-
-  return (
-    <div className="calculator">
-      <input type="text" value={input} readOnly className="display" />
-      <div className="buttons">
-        {["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"].map((char) => (
-          <button key={char} onClick={() => (char === "=" ? handleCalculate() : handleClick(char))}>
-            {char}
-          </button>
-        ))}
-        <button className="clear" onClick={handleClear}>
-          C
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Calculator;
-```
-## APP.JS
-```js
-import React from "react";
-import Calculator from "./components/Calculator";
-
-function App() {
-  return (
-    <div className="App">
-      <h1 style={{ textAlign: "center", color: "#fff" }}>Simple Calculator</h1>
-      <Calculator />
-      <footer>
-        <p>Developed by <strong>Yogesh V.S.</strong></p>
-      </footer>
-    </div>
-  );
-}
-
-export default App;
-```
-
 ## OUTPUT
-
-![image](https://github.com/user-attachments/assets/6163c25b-f16a-405d-be2d-df0b9f8dba7a)
-![image](https://github.com/user-attachments/assets/eb9cdf19-c1be-48f8-8a80-634df7ae7718)
-
+![image](https://github.com/user-attachments/assets/ec7ebf5f-cb05-4b94-b634-c9639dd00f97)
 
 
 ## RESULT
