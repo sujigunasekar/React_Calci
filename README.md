@@ -179,9 +179,10 @@ function App() {
 export default App;
 ```
 ## OUTPUT:
-![img1](https://github.com/user-attachments/assets/ba9df840-6644-47f9-bcb3-acb043b388e3)
+![Screenshot 2025-05-06 104416 (6)](https://github.com/user-attachments/assets/b23c2aff-b5b0-4ccc-bef9-813bb2b443b6)
 
-![img 2](https://github.com/user-attachments/assets/d5064e2b-f4a2-48b6-bd82-f11e66dd02f5)
+![Screenshot 2025-05-06 104428](https://github.com/user-attachments/assets/78892c7e-423a-4792-8f05-082ddec5f373)
+
 
 
 ## RESULT
